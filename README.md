@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 ## (ESWA2025) RQFormer : Rotated Query Transformer for end-to-end oriented object detection 
 Paper link   https://www.sciencedirect.com/science/article/pii/S0957417424029014
@@ -182,3 +183,8 @@ Our codes construct on:
   year={2023}
 }
 ```
+=======
+# RQFormer Rotated Query Transformer for end-to-end oriented object detection (ESWA 2024)
+
+The code will be released after the paper is officially accepted.
+>>>>>>> 8b4e4520ea30da2ccda4a2192e3630021e9d1c64
