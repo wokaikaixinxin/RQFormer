@@ -22,10 +22,9 @@ from mmdet.models.task_modules.prior_generators.point_generator import \
 @MODELS.register_module()
 class OrientedDDQFCNRPN(AnchorFreeHead):
     """Oriented DDQ FCN RPN head for RRoIFormer."""
-
     def __init__(self,
                  *args,
-                 angle_version: str = 'le90',
+                 angle_version: str='le90',
                  ddq_num_classes: int = 15,
                  num_proposals: int = 300,
                  shuffle_channles=64,
@@ -60,14 +59,14 @@ class OrientedDDQFCNRPN(AnchorFreeHead):
                  ),
                  **kwargs) -> None:
         self.ddq_num_classes = ddq_num_classes
-        self.num_proposals = num_proposals  # before super().__init__(), because of _init_layers
+        self.num_proposals = num_proposals      # before super().__init__(), because of _init_layers
         super().__init__(*args,
                          strides=strides,
-                         loss_cls=dict(type='mmdet.FocalLoss'),  # just to pass the stupid registry
-                         loss_bbox=dict(type='mmdet.IoULoss'),  # just to pass the stupid registry
-                         bbox_coder=dict(type='mmdet.DistancePointBBoxCoder'),
+                         loss_cls = dict(type='mmdet.FocalLoss'),   # just to pass the stupid registry
+                         loss_bbox = dict(type='mmdet.IoULoss'),    # just to pass the stupid registry
+                         bbox_coder = dict(type='mmdet.DistancePointBBoxCoder'),
                          **kwargs)
-        self.loss_bbox, self.loss_cls, self.bbox_coder = None, None, None  # donnot use them, just to pass the stupid registry
+        self.loss_bbox, self.loss_cls, self.bbox_coder = None, None, None   # donnot use them, just to pass the stupid registry
         self.angle_version = angle_version
         self.aux_loss = AuxLoss(**aux_loss)
         self.main_loss = AuxLoss(**main_loss)
@@ -87,6 +86,7 @@ class OrientedDDQFCNRPN(AnchorFreeHead):
         self.remain_chs = self.in_channels - self.shuffle_channles * 2
         self.init_weights()
         self.prior_generator = MlvlPointGenerator(strides, offset=offset)
+
 
     def _init_layers(self):
         self.inter_convs = nn.ModuleList()
@@ -192,14 +192,14 @@ class OrientedDDQFCNRPN(AnchorFreeHead):
                 down_input = inputs[dow_lvl]
                 remain = tar_input[:, :self.remain_chs]
                 from_top = top_input[:,
-                           self.remain_chs:][:,
-                           self.shuffle_channles:]
+                                     self.remain_chs:][:,
+                                                       self.shuffle_channles:]
                 from_top = F.interpolate(from_top,
                                          size=tar_input.shape[-2:],
                                          mode='bilinear',
                                          align_corners=True)
                 from_down = down_input[:, self.remain_chs:][:, :self.
-                shuffle_channles]
+                                                            shuffle_channles]
                 from_down = F.interpolate(from_down,
                                           size=tar_input.shape[-2:],
                                           mode='bilinear',
@@ -222,10 +222,11 @@ class OrientedDDQFCNRPN(AnchorFreeHead):
         self.gt_bboxes = gt_bboxes
         loss = dict()
 
+
         main_results, aux_results = self.forward(x)
 
         main_loss_inputs, aux_loss_inputs, \
-        distinc_query_dict = self.get_inputs(
+            distinc_query_dict = self.get_inputs(
             main_results, aux_results, img_metas=img_metas)
 
         aux_loss = self.aux_loss(*aux_loss_inputs,
@@ -338,9 +339,10 @@ class OrientedDDQFCNRPN(AnchorFreeHead):
                                                    dqs_query_ids,
                                                    self.num_proposals)
 
+
         return (dqs_all_cls_scores, dqs_all_bbox_preds), \
-               (aux_cls_scores, aux_bbox_preds), \
-               distinct_query_dict
+                (aux_cls_scores, aux_bbox_preds), \
+                    distinct_query_dict
 
     def pre_dqs(self,
                 cls_scores_list=None,
@@ -354,6 +356,7 @@ class OrientedDDQFCNRPN(AnchorFreeHead):
         all_bbox_preds = []
         all_query_ids = []
         for img_id in range(num_imgs):
+
             single_cls_score_list = select_single_mlvl(cls_scores_list,
                                                        img_id,
                                                        detach=False)
@@ -375,8 +378,8 @@ class OrientedDDQFCNRPN(AnchorFreeHead):
         start_inds = 0
         for level_idx, (cls_score, bbox_pred, priors, stride) in \
                 enumerate(zip(cls_score_list, bbox_pred_list,
-                              mlvl_priors, \
-                              self.prior_generator.strides)):
+                     mlvl_priors, \
+                        self.prior_generator.strides)):
 
             assert cls_score.size()[-2:] == bbox_pred.size()[-2:]
             bbox_pred = bbox_pred.permute(1, 2, 0).reshape(-1, 5)
@@ -396,12 +399,12 @@ class OrientedDDQFCNRPN(AnchorFreeHead):
                 binary_cls_score, 0, nms_pre,
                 dict(bbox_pred=bbox_pred, priors=priors, cls_score=cls_score))
             scores, labels, keep_idxs, filtered_results = results
-            keep_idxs = torch.div((keep_idxs + start_inds), self.num_base_priors, rounding_mode='floor')
+            keep_idxs = (keep_idxs + start_inds) // self.num_base_priors
             start_inds = start_inds + len(cls_score)
             bbox_pred = filtered_results['bbox_pred']
             priors = filtered_results['priors']
             cls_score = filtered_results['cls_score']
-            bbox_pred[..., :4] = bbox_pred[..., :4] * stride[0]
+            bbox_pred = bbox_pred * stride[0]
             bbox_pred = distance2obb(priors, bbox_pred, angle_version=self.angle_version)
             mlvl_bboxes.append(bbox_pred)
             mlvl_scores.append(cls_score)
@@ -409,6 +412,7 @@ class OrientedDDQFCNRPN(AnchorFreeHead):
 
         return torch.cat(mlvl_scores), torch.cat(mlvl_bboxes), torch.cat(
             mlvl_query_inds)
+
 
     def dqs(self, all_mlvl_scores, all_mlvl_bboxes, all_query_ids, **kwargs):
         all_distinct_bboxes = []
@@ -429,6 +433,7 @@ class OrientedDDQFCNRPN(AnchorFreeHead):
             all_distinct_scores.append(mlvl_scores[keep_idxs])
             all_distinct_query_ids.append(query_id[keep_idxs])
         return all_distinct_scores, all_distinct_bboxes, all_distinct_query_ids
+
 
     def construct_query(self, feat_dict, scores, bboxes, query_ids, num=300):
         cls_feats = feat_dict['cls_feats']
@@ -482,16 +487,16 @@ class OrientedDDQFCNRPN(AnchorFreeHead):
         (labels_list, label_weights_list, bbox_targets_list,
          alignment_metrics_list) = cls_reg_targets
 
-        losses_cls, losses_bbox, \
-        cls_avg_factors, bbox_avg_factors = multi_apply(
-            self.loss_single,
-            flatten_cls_scores,
-            flatten_bbox_preds,
-            labels_list,
-            label_weights_list,
-            bbox_targets_list,
-            alignment_metrics_list,
-        )
+        losses_cls, losses_bbox,\
+            cls_avg_factors, bbox_avg_factors = multi_apply(
+                self.loss_single,
+                flatten_cls_scores,
+                flatten_bbox_preds,
+                labels_list,
+                label_weights_list,
+                bbox_targets_list,
+                alignment_metrics_list,
+                )
 
         cls_avg_factor = reduce_mean(sum(cls_avg_factors)).clamp_(min=1).item()
         losses_cls = list(map(lambda x: x / cls_avg_factor, losses_cls))
@@ -542,6 +547,7 @@ class OrientedDDQFCNRPN(AnchorFreeHead):
         return loss_cls, loss_bbox, alignment_metrics.sum(
         ), pos_bbox_weight.sum()
 
+
     def get_targets(self,
                     cls_scores,
                     bbox_preds,
@@ -565,7 +571,7 @@ class OrientedDDQFCNRPN(AnchorFreeHead):
         if len(gt_labels) == 0:
             num_valid_anchors = len(cls_scores)
             bbox_targets = torch.zeros_like(bbox_preds)
-            labels = bbox_preds.new_full((num_valid_anchors,),
+            labels = bbox_preds.new_full((num_valid_anchors, ),
                                          cls_scores.size(-1),
                                          dtype=torch.long)
             label_weights = bbox_preds.new_zeros(num_valid_anchors,
@@ -592,7 +598,7 @@ class OrientedDDQFCNRPN(AnchorFreeHead):
 
         num_valid_anchors = len(cls_scores)
         bbox_targets = torch.zeros_like(bbox_preds)
-        labels = bbox_preds.new_full((num_valid_anchors,),
+        labels = bbox_preds.new_full((num_valid_anchors, ),
                                      cls_scores.size(-1),
                                      dtype=torch.long)
         label_weights = bbox_preds.new_zeros(num_valid_anchors,
@@ -627,7 +633,7 @@ class OrientedDDQFCNRPN(AnchorFreeHead):
             pos_alignment_metrics = assign_metrics[gt_class_inds]
             pos_ious = assign_ious[gt_class_inds]
             pos_norm_alignment_metrics = pos_alignment_metrics / (
-                    pos_alignment_metrics.max() + 10e-8) * pos_ious.max()
+                pos_alignment_metrics.max() + 10e-8) * pos_ious.max()
             norm_alignment_metrics[
                 pos_inds[gt_class_inds]] = pos_norm_alignment_metrics
 
@@ -639,8 +645,9 @@ class OrientedDDQFCNRPN(AnchorFreeHead):
 
         main_results, aux_results = self.forward(x)
         main_loss_inputs, aux_loss_inputs, \
-        distinc_query_dict = self.get_inputs(
+            distinc_query_dict = self.get_inputs(
             main_results, aux_results, img_metas=img_metas)
+
 
         imgs_whwht = []
         for meta in img_metas:
@@ -651,20 +658,19 @@ class OrientedDDQFCNRPN(AnchorFreeHead):
 
         return loss, imgs_whwht, distinc_query_dict, self.position_embed
 
-
 class AuxLoss(nn.Module):
     def __init__(
-            self,
-            loss_cls=dict(
-                type='QualityFocalLoss',
-                use_sigmoid=True,
-                activated=True,  # use probability instead of logit as input
-                beta=2.0,
-                loss_weight=1.0),
-            loss_bbox=dict(type='GIoULoss', loss_weight=2.0),
-            train_cfg=dict(assigner=dict(type='TopkHungarianAssigner', topk=8),
-                           alpha=1,
-                           beta=6),
+        self,
+        loss_cls=dict(
+            type='QualityFocalLoss',
+            use_sigmoid=True,
+            activated=True,  # use probability instead of logit as input
+            beta=2.0,
+            loss_weight=1.0),
+        loss_bbox=dict(type='GIoULoss', loss_weight=2.0),
+        train_cfg=dict(assigner=dict(type='TopkHungarianAssigner', topk=8),
+                       alpha=1,
+                       beta=6),
     ):
         super(AuxLoss, self).__init__()
         self.train_cfg = train_cfg
@@ -732,16 +738,16 @@ class AuxLoss(nn.Module):
         (labels_list, label_weights_list, bbox_targets_list,
          alignment_metrics_list) = cls_reg_targets
 
-        losses_cls, losses_bbox, \
-        cls_avg_factors, bbox_avg_factors = multi_apply(
-            self.loss_single,
-            flatten_cls_scores,
-            flatten_bbox_preds,
-            labels_list,
-            label_weights_list,
-            bbox_targets_list,
-            alignment_metrics_list,
-        )
+        losses_cls, losses_bbox,\
+            cls_avg_factors, bbox_avg_factors = multi_apply(
+                self.loss_single,
+                flatten_cls_scores,
+                flatten_bbox_preds,
+                labels_list,
+                label_weights_list,
+                bbox_targets_list,
+                alignment_metrics_list,
+                )
 
         cls_avg_factor = reduce_mean(sum(cls_avg_factors)).clamp_(min=1).item()
         losses_cls = list(map(lambda x: x / cls_avg_factor, losses_cls))
@@ -775,7 +781,7 @@ class AuxLoss(nn.Module):
         if num_gt == 0:
             num_valid_anchors = len(cls_scores)
             bbox_targets = torch.zeros_like(bbox_preds)
-            labels = bbox_preds.new_full((num_valid_anchors,),
+            labels = bbox_preds.new_full((num_valid_anchors, ),
                                          cls_scores.size(-1),
                                          dtype=torch.long)
             label_weights = bbox_preds.new_zeros(num_valid_anchors,
@@ -806,7 +812,7 @@ class AuxLoss(nn.Module):
 
         num_valid_anchors = len(cls_scores)
         bbox_targets = torch.zeros_like(bbox_preds)
-        labels = bbox_preds.new_full((num_valid_anchors,),
+        labels = bbox_preds.new_full((num_valid_anchors, ),
                                      cls_scores.size(-1),
                                      dtype=torch.long)
         label_weights = bbox_preds.new_zeros(num_valid_anchors,
@@ -841,12 +847,11 @@ class AuxLoss(nn.Module):
             pos_alignment_metrics = assign_metrics[gt_class_inds]
             pos_ious = assign_ious[gt_class_inds]
             pos_norm_alignment_metrics = pos_alignment_metrics / (
-                    pos_alignment_metrics.max() + 10e-8) * pos_ious.max()
+                pos_alignment_metrics.max() + 10e-8) * pos_ious.max()
             norm_alignment_metrics[
                 pos_inds[gt_class_inds]] = pos_norm_alignment_metrics
 
         return (labels, label_weights, bbox_targets, norm_alignment_metrics)
-
 
 def padding_to(inputs, max=300):
     if max is None:
