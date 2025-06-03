@@ -124,7 +124,7 @@ python tools/test.py projects/RQFormer/configs/rroiformer_le90_r50_q500_layer2_s
 (2) Calculate precision, recall and F-measure. The script.py adapted from [official website](https://rrc.cvc.uab.es/?ch=4&com=mymethods&task=1).
 ```bash
 pip install Polygon3
-python projects/icdar2015_evaluation/script.py –g=gt.zip –s=submit.zip
+python projects/icdar2015_evaluation/script.py –g=projects/icdar2015_evaluation/gt.zip –s=submit.zip
 ```
 
 ## Main Result
