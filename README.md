@@ -126,14 +126,17 @@ python projects/icdar2015_evaluation/script.py –g=gt.zip –s=submit.zip
 |ICDAR2015|0.850406504065|0.7554164660568|0.800101988781|R50|160e|2gpu*2img|le90|500|[rroiformer_le90_r50_q500_layer2_sq1_dq1_t0.9_160e_icdar2015.py](./projects/RQFormer/configs/rroiformer_le90_r50_q500_layer2_sq1_dq1_t0.9_160e_icdar2015.py)|[model \| log \| submit](https://pan.baidu.com/s/1omXoX2iJMVIzdnBx6zt6Cg?pwd=tp1l)|[model \| log](https://www.modelscope.cn/models/wokaikaixinxin/RQFormer/files)|
 
 **Oriented DDQ** :
-|Dataset|AP50|Backbone|lr schd|batch|Angle|Query|Configs|Baidu|魔塔(比百度网盘快)|
+|Dataset|mAP|Backbone|lr schd|batch|Angle|Query|Configs|Download|Baidu|魔塔(比百度网盘快)|
 |--|--|--|--|--|--|--|--|--|--|
-|DIOR-R|61.66|R50|1x|2|le90|300|[oriented_ddq_le90_r50_q300_layer2_1x_dior.py](./projects/RQFormer/configs/oriented_ddq_le90_r50_q300_layer2_1x_dior.py)|[model \| log](https://pan.baidu.com/s/1QJKMgWQt6YSHkKt7BbBAFQ?pwd=qlq5)|[model \| log](https://www.modelscope.cn/models/wokaikaixinxin/RQFormer/files)|
+|DIOR-R|61.66|R50|1x|2|le90|300|[oriented_ddq_le90_r50_q300_layer2_1x_dior.py](./projects/RRoIFormer/configs/oriented_ddq_le90_r50_q300_layer2_1x_dior.py)|[model \| log](https://pan.baidu.com/s/1QJKMgWQt6YSHkKt7BbBAFQ?pwd=qlq5)[model \| log](https://www.modelscope.cn/models/wokaikaixinxin/RQFormer/files)|
+|DIOR-R|66.51|R50|3x|4|le90|500|[oriented_ddq_le90_r50_q500_layer2_3x_dior.py](./projects/RRoIFormer/configs/oriented_ddq_le90_r50_q500_layer2_3x_dior.py)|[modle \| log](https://pan.baidu.com/s/1SOKILJ65-GowdAppzNi3dA?pwd=6ow5)[model \| log](https://www.modelscope.cn/models/wokaikaixinxin/RQFormer/files)|
 
 **Oriented DDQ + RRoI Attention** :
-|Dataset|AP50|Backbone|lr schd|batch|Angle|Query|Configs|Baidu|魔塔(比百度网盘快)|
+|Dataset|mAP|Backbone|lr schd|batch|Angle|Query|Configs|Baidu|魔塔(比百度网盘快)|
 |--|--|--|--|--|--|--|--|--|--|
-|DIOR-R|61.67|R50|1x|2|le90|300|[oriented_ddq_le90_r50_q300_layer2_rroiattn_1x_dior.py](./projects/RQFormer/configs/oriented_ddq_le90_r50_q300_layer2_rroiattn_1x_dior.py)|[model \| log](https://pan.baidu.com/s/1Ev13fYQpMKlBe34P55CJqQ?pwd=tj1p)|[model \| log](https://www.modelscope.cn/models/wokaikaixinxin/RQFormer/files)|
+|DIOR-R|67.11|R50|3x|4|le90|500|[oriented_ddq_le90_r50_q500_layer2_rroiattn_3x_dior.py](./projects/RRoIFormer/configs/oriented_ddq_le90_r50_q500_layer2_rroiattn_3x_dior.py)|[model \| log](https://pan.baidu.com/s/1SNhoWmiNxVXorQ49gnPFyA?pwd=04lg)[model \| log](https://pan.baidu.com/s/1QJKMgWQt6YSHkKt7BbBAFQ?pwd=qlq5)[model \| log](https://www.modelscope.cn/models/wokaikaixinxin/RQFormer/files)|
+|DOTA-v1.0|74.05|R50|2x|4|le90|500|[oriented_ddq_le90_r50_q500_layer2_rroiattn_2x_dotav1.0.py](./projects/RRoIFormer/configs/oriented_ddq_le90_r50_q500_layer2_rroiattn_2x_dotav1.0.py)|[model \| log](https://pan.baidu.com/s/1aXOw2NE1HJDwFw04xxq9PA?pwd=2abr)[model \| log](https://pan.baidu.com/s/1QJKMgWQt6YSHkKt7BbBAFQ?pwd=qlq5)[model \| log](https://www.modelscope.cn/models/wokaikaixinxin/RQFormer/files)|
+
 
 ## Visualization
 
