@@ -136,7 +136,7 @@ python projects/icdar2015_evaluation/script.py –g=gt.zip –s=submit.zip
 |Dataset|AP50|Backbone|lr schd|batch|Angle|Query|Configs|Baidu|魔塔(比百度网盘快)|
 |--|--|--|--|--|--|--|--|--|--|
 |DIOR-R|67.11|R50|3x|4|le90|500|[oriented_ddq_le90_r50_q500_layer2_rroiattn_3x_dior.py](./projects/RQFormer/configs/oriented_ddq_le90_r50_q500_layer2_rroiattn_3x_dior.py)|[model \| log](https://pan.baidu.com/s/1SNhoWmiNxVXorQ49gnPFyA?pwd=04lg)[model \| log](https://pan.baidu.com/s/1QJKMgWQt6YSHkKt7BbBAFQ?pwd=qlq5)|[model \| log](https://www.modelscope.cn/models/wokaikaixinxin/RQFormer/files)|
-|DOTA-v1.0|74.05|R50|2x|4|le90|500|[oriented_ddq_le90_r50_q500_layer2_rroiattn_2x_dotav1.0.py](./projects/RQFormerr/configs/oriented_ddq_le90_r50_q500_layer2_rroiattn_2x_dotav1.0.py)|[model \| log](https://pan.baidu.com/s/1aXOw2NE1HJDwFw04xxq9PA?pwd=2abr)[model \| log](https://pan.baidu.com/s/1QJKMgWQt6YSHkKt7BbBAFQ?pwd=qlq5)|[model \| log](https://www.modelscope.cn/models/wokaikaixinxin/RQFormer/files)|
+|DOTA-v1.0|74.05|R50|2x|4|le90|500|[oriented_ddq_le90_r50_q500_layer2_rroiattn_2x_dotav1.0.py](./projects/RQFormer/configs/oriented_ddq_le90_r50_q500_layer2_rroiattn_2x_dotav1.0.py)|[model \| log](https://pan.baidu.com/s/1aXOw2NE1HJDwFw04xxq9PA?pwd=2abr)[model \| log](https://pan.baidu.com/s/1QJKMgWQt6YSHkKt7BbBAFQ?pwd=qlq5)|[model \| log](https://www.modelscope.cn/models/wokaikaixinxin/RQFormer/files)|
 
 
 ## Visualization
