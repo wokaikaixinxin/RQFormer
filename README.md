@@ -132,7 +132,7 @@ python projects/icdar2015_evaluation/script.py –g=gt.zip –s=submit.zip
 
 **Oriented DDQ + RRoI Attention** :
 |Dataset|AP50|Backbone|lr schd|batch|Angle|Query|Configs|Baidu|魔塔(比百度网盘快)|
-|--|--|--|--|--|--|--|--|--|
+|--|--|--|--|--|--|--|--|--|--|
 |DIOR-R|61.67|R50|1x|2|le90|300|[oriented_ddq_le90_r50_q300_layer2_rroiattn_1x_dior.py](./projects/RQFormer/configs/oriented_ddq_le90_r50_q300_layer2_rroiattn_1x_dior.py)|[model \| log](https://pan.baidu.com/s/1Ev13fYQpMKlBe34P55CJqQ?pwd=tj1p)|[model \| log](https://www.modelscope.cn/models/wokaikaixinxin/RQFormer/files)|
 
 ## Visualization
