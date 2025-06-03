@@ -16,6 +16,22 @@ Selective Distinct Query is shown below.
 <img src='./projects/RQFormer/rroiformer/SDQ.png' atl='SDQ' width='50%' height=auto'>
 </div>
 
+NEW
+
+&#x2705; ICDAR2015 Dataset in MMRotate-1.x
+
+&#x2705; ICDAR2015 Metric  in MMRotate-1.x
+
+&#x2705; ChannelMapperWithGN in MMRotate-1.x
+
+&#x2705; RBBoxL1Cost in MMRotate-1.x
+
+&#x2705; RotatedIoUCost in  MMRotate-1.x
+
+&#x2705; TopkHungarianAssigner in MMRotate-1.x
+
+If you like it, please click on star.
+
 
 ## Installation
 
