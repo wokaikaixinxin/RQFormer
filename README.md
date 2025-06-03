@@ -128,8 +128,8 @@ python projects/icdar2015_evaluation/script.py –g=gt.zip –s=submit.zip
 **Oriented DDQ** :
 |Dataset|AP50|Backbone|lr schd|batch|Angle|Query|Configs|Baidu|魔塔(比百度网盘快)|
 |--|--|--|--|--|--|--|--|--|--|
-|DIOR-R|61.66|R50|1x|2|le90|300|[oriented_ddq_le90_r50_q300_layer2_1x_dior.py](./projects/RRoIFormer/configs/oriented_ddq_le90_r50_q300_layer2_1x_dior.py)|[model \| log](https://pan.baidu.com/s/1QJKMgWQt6YSHkKt7BbBAFQ?pwd=qlq5)|
-|DIOR-R|66.51|R50|3x|4|le90|500|[oriented_ddq_le90_r50_q500_layer2_3x_dior.py](./projects/RRoIFormer/configs/oriented_ddq_le90_r50_q500_layer2_3x_dior.py)|[modle \| log](https://pan.baidu.com/s/1SOKILJ65-GowdAppzNi3dA?pwd=6ow5)|
+|DIOR-R|61.66|R50|1x|2|le90|300|[oriented_ddq_le90_r50_q300_layer2_1x_dior.py](./projects/RRoIFormer/configs/oriented_ddq_le90_r50_q300_layer2_1x_dior.py)|[model \| log](https://pan.baidu.com/s/1QJKMgWQt6YSHkKt7BbBAFQ?pwd=qlq5)|[model \| log](https://www.modelscope.cn/models/wokaikaixinxin/RQFormer/files)
+|DIOR-R|66.51|R50|3x|4|le90|500|[oriented_ddq_le90_r50_q500_layer2_3x_dior.py](./projects/RRoIFormer/configs/oriented_ddq_le90_r50_q500_layer2_3x_dior.py)|[modle \| log](https://pan.baidu.com/s/1SOKILJ65-GowdAppzNi3dA?pwd=6ow5)|[model \| log](https://www.modelscope.cn/models/wokaikaixinxin/RQFormer/files)
 
 
 **Oriented DDQ + RRoI Attention** :
