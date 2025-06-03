@@ -5,7 +5,7 @@ _base_ = [
 ]
 
 custom_imports = dict(
-    imports=['projects.RRoIFormer.rroiformer'], allow_failed_imports=False)
+    imports=['projects.RQFormer.rroiformer'], allow_failed_imports=False)
 
 angle_version = 'le90'
 num_stages = 2
