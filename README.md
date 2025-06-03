@@ -130,12 +130,12 @@ python projects/icdar2015_evaluation/script.py –g=gt.zip –s=submit.zip
 ## Main Result
 **RQFormer** :
 
-|Dataset|AP50|Backbone|lr schd|batch|Angle|Query|Configs|Aug|Baidu|魔塔(比百度网盘快)|
-|--|--|--|--|--|--|--|--|--|--|--|
-|DIOR-R|67.31|R50|3x|2|le90|500|[rroiformer_le90_r50_q500_layer2 _sq1_dq1_t0.85_3x_dior.py](./projects/RQFormer/configs/rroiformer_le90_r50_q500_layer2_sq1_dq1_t0.85_3x_dior.py)|-|[model \| log](https://pan.baidu.com/s/1f6W3hjU_V6iLMsGZjck_dA?pwd=a1vd )|[model \| log](https://www.modelscope.cn/models/wokaikaixinxin/RQFormer/files)|
-|DOTA-v1.0|75.04|R50|2x|2|le90|500|[rroiformer_le90_r50_q500_layer2 _sq1_dq1_t0.9_2x_dotav1.0.py](./projects/RQFormer/configs/rroiformer_le90_r50_q500_layer2_sq1_dq1_t0.9_2x_dotav1.0.py)|single scale|[model \| log \| results](https://pan.baidu.com/s/1ShkGD7aIVFYfhrvz_60eYg?pwd=qv6a)|[model \| log](https://www.modelscope.cn/models/wokaikaixinxin/RQFormer/files)|
-|DOTA-v1.5|67.43|R50|2x|2gpu*2img|le90|500|[rroiformer_le90_r50_q500_layer2 _sq1_dq1_t0.9_2x_dotav1.5.py](./projects/RQFormer/configs/rroiformer_le90_r50_q500_layer2_sq1_dq1_t0.9_2x_dotav1.5.py)|single scale|[model \| log \| results](https://pan.baidu.com/s/1EASJM3AIMuZCQWdWTJ28Cw?pwd=iioq)|[model \| log](https://www.modelscope.cn/models/wokaikaixinxin/RQFormer/files)|
-|DOTA-v2.0|53.28|R50|2x|2gpu*2img|le90|500|[rroiformer_le90_r50_q500_layer2 _sq1_dq1_t0.9_2x_dotav2.0.py](./projects/RQFormer/configs/rroiformer_le90_r50_q500_layer2_sq1_dq1_t0.9_2x_dotav2.0.py)|single scale|[model \| log \| results](https://pan.baidu.com/s/1VEdSByfrz5IVKVnGay-sjg?pwd=xats)|[model \| log](https://www.modelscope.cn/models/wokaikaixinxin/RQFormer/files)|
+|Dataset|AP50|AP75|mAP|Backbone|lr schd|batch|Angle|Query|Configs|Aug|Baidu|魔塔(比百度网盘快)|
+|--|--|--|--|--|--|--|--|--|--|--|--|--|
+|DIOR-R|67.31|47.36|-|R50|3x|2|le90|500|[rroiformer_le90_r50_q500_layer2 _sq1_dq1_t0.85_3x_dior.py](./projects/RQFormer/configs/rroiformer_le90_r50_q500_layer2_sq1_dq1_t0.85_3x_dior.py)|-|[model \| log](https://pan.baidu.com/s/1f6W3hjU_V6iLMsGZjck_dA?pwd=a1vd )|[model \| log](https://www.modelscope.cn/models/wokaikaixinxin/RQFormer/files)|
+|DOTA-v1.0|75.04|49.22|46.73|R50|2x|2|le90|500|[rroiformer_le90_r50_q500_layer2 _sq1_dq1_t0.9_2x_dotav1.0.py](./projects/RQFormer/configs/rroiformer_le90_r50_q500_layer2_sq1_dq1_t0.9_2x_dotav1.0.py)|single scale|[model \| log \| results](https://pan.baidu.com/s/1ShkGD7aIVFYfhrvz_60eYg?pwd=qv6a)|[model \| log](https://www.modelscope.cn/models/wokaikaixinxin/RQFormer/files)|
+|DOTA-v1.5|67.43|42.62|41.36|R50|2x|2gpu*2img|le90|500|[rroiformer_le90_r50_q500_layer2 _sq1_dq1_t0.9_2x_dotav1.5.py](./projects/RQFormer/configs/rroiformer_le90_r50_q500_layer2_sq1_dq1_t0.9_2x_dotav1.5.py)|single scale|[model \| log \| results](https://pan.baidu.com/s/1EASJM3AIMuZCQWdWTJ28Cw?pwd=iioq)|[model \| log](https://www.modelscope.cn/models/wokaikaixinxin/RQFormer/files)|
+|DOTA-v2.0|53.28|30.31|31.02|R50|2x|2gpu*2img|le90|500|[rroiformer_le90_r50_q500_layer2 _sq1_dq1_t0.9_2x_dotav2.0.py](./projects/RQFormer/configs/rroiformer_le90_r50_q500_layer2_sq1_dq1_t0.9_2x_dotav2.0.py)|single scale|[model \| log \| results](https://pan.baidu.com/s/1VEdSByfrz5IVKVnGay-sjg?pwd=xats)|[model \| log](https://www.modelscope.cn/models/wokaikaixinxin/RQFormer/files)|
 
 |Dataset|P|R|F-measure|Backbone|lr schd|batch|Angle|Query|Configs|Baidu|魔塔(比百度网盘快)|
 |--|--|--|--|--|--|--|--|--|--|--|--|
