@@ -34,7 +34,9 @@ model = dict(
         type='mmdet.FPN',
         in_channels=[256, 512, 1024, 2048],
         out_channels=256,
-        num_outs=5),
+        start_level=0,
+        add_extra_convs='on_input',
+        num_outs=6),
     rpn_head=dict(
         type='OrientedDDQFCNRPN',
         angle_version=angle_version,
@@ -42,7 +44,7 @@ model = dict(
         num_proposals = num_proposals,
         in_channels=256,
         feat_channels=256,
-        strides=(4, 8, 16, 32, 64),
+        strides=(8, 16, 32, 64, 128),
         norm_cfg=dict(type='GN', num_groups=32, requires_grad=True),
         dqs_cfg=dict(type='nms_rotated', iou_threshold=0.7, nms_pre=1000),
         offset=0.5,
@@ -100,7 +102,7 @@ model = dict(
                 sample_num=2,
                 clockwise=True),
             out_channels=256,
-            featmap_strides=[4, 8, 16, 32, 64]),
+            featmap_strides=[4, 8, 16, 32, 64, 128]),
         bbox_head=[
             dict(
                 type='OrientedDIIHead',
@@ -139,7 +141,7 @@ model = dict(
                     edge_swap=True,
                     proj_xy=True,
                     target_means=(.0, .0, .0, .0, .0),
-                    target_stds=(1., 1., 1., 1., 1.),
+                    target_stds=(1., 1., 1., 1., 0.08),
                     use_box_type=False)
             ) for _ in range(num_stages)
         ]),
@@ -166,9 +168,16 @@ model = dict(
 # optimizer
 optim_wrapper = dict(
     optimizer=dict(
-        _delete_=True, type='AdamW', lr=4e-05, weight_decay=1e-07),
+        _delete_=True, type='AdamW', lr=2.5e-05, weight_decay=1e-07),
     clip_grad=dict(max_norm=1, norm_type=2)
 )
 
-train_cfg=dict(val_interval=1)
+lr_config = dict(
+    policy='step',
+    warmup='linear',
+    warmup_iters=500,
+    warmup_ratio=0.001,
+)
+
+train_cfg=dict(val_interval=6)
 default_hooks = dict(checkpoint=dict(interval=1))
